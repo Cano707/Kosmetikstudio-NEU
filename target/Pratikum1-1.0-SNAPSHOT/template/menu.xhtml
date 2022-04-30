@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <h:form>
+            <p:menu id="left-menu">
+                <p:menuitem value="Startseite" action="index.xhtml" icon="pi pi-home"/>
+                <p:menuitem value="Anmelden" action="signin.xhtml" icon="pi pi-sign-in" rendered="#{!sessionManager.loggedIn}"/>
+                <p:menuitem value="Registrieren" action="signup.xhtml" icon="pi pi-arrow-circle-up" rendered="#{!sessionManager.loggedIn}"/>
+                <p:menuitem value="Produktübersicht" action="products.xhtml" icon="pi pi-circle-on"/>
+                <p:menuitem value="Serviceleistungen" action="services.xhtml" icon="pi pi-circle-off"/>
+                <p:menuitem value="Warenkorb" action="shoppingcart.xhtml" icon="pi pi-shopping-cart"/>
+                <p:menuitem value="Abmelden" action="#{login.logout}" icon="pi pi-sign-out" rendered="#{sessionManager.loggedIn}" update="left-menu"/>
+                <p:menuitem value="Benutzerverwaltung" action="user_management.xhtml" icon="pi pi-user-edit" rendered="#{sessionManager.admin}"/>
+            </p:menu>
+        </h:form>
+    </h:body>
+</html>
+

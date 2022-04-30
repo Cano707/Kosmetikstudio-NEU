@@ -1,0 +1,17 @@
+com/mycompany/praktikum1/registrationValidator/PasswordValidator.class
+com/mycompany/praktikum1_neu/Login.class
+com/mycompany/praktikum1_neu/User.class
+com/mycompany/praktikum1_neu/Database.class
+com/mycompany/praktikum1_neu/resources/JavaEE8Resource.class
+com/mycompany/praktikum1/registrationValidator/RegexValidator.class
+com/mycompany/praktikum1/registrationValidator/SurnameValidator.class
+com/mycompany/praktikum1_neu/SessionManager.class
+com/mycompany/praktikum1_neu/Registration.class
+com/mycompany/praktikum1_neu/JAXRSConfiguration.class
+com/mycompany/praktikum1/registrationValidator/NameValidator.class
+com/mycompany/praktikum1_neu/User$Role.class
+com/mycompany/praktikum1_neu/UserManager.class
+com/mycompany/praktikum1/registrationValidator/UsernameValidator.class
+com/mycompany/praktikum1/registrationValidator/EmailValidator.class
+com/mycompany/praktikum1/registrationValidator/PhoneValidator.class
+com/mycompany/praktikum1_neu/PasswordHashConverter.class
