@@ -10,15 +10,14 @@
         <ui:composition template="template/master.xhtml">
             <ui:define name="content">
                 <h:form id="registration-form">
-                    <p:growl id="registration-notfication" for="registration-notfication-key" />
+                    <p:growl  id="registration-notfication" for="registration-notfication-key" />
                     <h:panelGrid id="registration-grid" columns="3">
                         
                         <p:outputLabel for="@next" value="Anrede"/>
-                        <p:selectOneRadio id="salutation" value="#{registration.salutation}" requiredMessage="Pflichtfeld" unselectable="true" required="True">
-                            <f:selectItem itemLabel="Herr" itemValue="Herr" />
-                            <f:selectItem itemLabel="Frau" itemValue="Frau"/>
-                            <f:selectItem itemLabel="Divers" itemValue="Divers"/>
-                        </p:selectOneRadio>
+                        <p:selectOneMenu id="salutation" value="#{registration.salutation}">
+                            <f:selectItems value="#{registration.salutations}"/>
+                            <f:ajax event="valueChange" render="salutationMsg"/>
+                        </p:selectOneMenu>
                         <p:message id="saltutationMsg" for="salutation"/> 
 
                         <p:outputLabel for="@next" value="Name"/>
@@ -35,16 +34,16 @@
                         </p:inputText>
                         <p:message id="surnameMsg" for="surname"/>
 
-                        <p:outputLabel for="@next" value="E-Mail (optional)"/>
-                        <p:inputText id="email" validator="emailValidator" validatorMessage="E-Mail ungültig"  value="#{registration.email}">
-                            <f:validateRegex pattern="[\w\d]+@[\w\d]+\.[\w\d]+|"/>
+                        <p:outputLabel for="@next" value="E-Mail"/>
+                        <p:inputText id="email" required="true" requiredMessage="Pflichtfeld" validator="emailValidator" validatorMessage="E-Mail ungültig"  value="#{registration.email}">
+                            <f:validateRegex pattern="[\w\d]+@[\w\d]+\.[\w\d]+"/>
                             <f:ajax render="emailMsg" event="keyup"/>
                         </p:inputText>
                         <p:message id="emailMsg" for="email"/>
                         
                         <p:outputLabel for="@next" value="Telefon"/>
-                        <p:inputText id="phone" validator="phoneValidator" validatorMessage="Nummer ungültig" value="#{registration.phone}">
-                            <f:validateRegex pattern="[\d]+|"/>
+                        <p:inputText id="phone" required="true" requiredMessage="Pflichtfeld" validator="phoneValidator" validatorMessage="Nummer ungültig" value="#{registration.phone}">
+                            <f:validateRegex pattern="[\d]+"/>
                             <f:ajax render="phoneMsg" event="keyup"/>
                            </p:inputText>
                         <p:message id="phoneMsg" for="phone"/>

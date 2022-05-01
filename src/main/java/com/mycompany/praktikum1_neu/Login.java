@@ -72,7 +72,7 @@ public class Login implements Serializable{
         cxt.getExternalContext().invalidateSession();
         cxt.getExternalContext().getSession(true);
         session.setLoggedIn(false);
-        return "index";
+        return "index?faces-redirect=true";
     }
     
     public SessionManager getSession() {

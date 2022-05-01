@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"    
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="template/master.xhtml">
+            <ui:define name="content">
+                <h:form id="product-form">
+                    <p:growl id="msgs"/>
+                    <p:dataScroller  value="#{productManager.productList}" var="product" chunkSize="3">
+                        <f:facet name="header">
+                            Unsere Produkte
+                        </f:facet>
+                            
+                        <div class="product">
+                            <hr/>
+                            <div class="product-list-item">
+                         
+                                    <div id="product-image">
+                                        <h:outputLabel  value="PIC"/>
+                                    </div>
+                                    <div class="product-list-detail">
+                                        <div class="product-name">#{product.name}</div>
+                                        <div class="product-description">#{product.description}</div>
+                                    </div>
+                                
+                                    <div id="delivery-div">
+                                        <p:outputLabel for="delivery-date" value="Lieferungsdatum"/>
+                                        <p:datePicker   id="delivery-date" value="#{shoppingCart.date}" locale="de" monthNavigator="true"
+                                                        pattern="dd.MM.yyyy">
+                                            <f:ajax event="valueChange" render="@all"/>
+                                        </p:datePicker>
+                                    </div>
+                                
+                                    <div id="amount-div">
+                                        <p:outputLabel for="@next" value="Menge"/>
+                                        <p:spinner id="amount-spinner" value="#{shoppingCart.amount}" placeholder="0"  min="0" max="#{product.stock}" stepFactor="1">
+                                            <f:ajax event="valueChange" render="@all"/>
+                                        </p:spinner>
+                                    </div>
+                                
+                                    <div class="product-action">
+                                        <h:outputText value="#{product.price}" id="price-label" styleClass="product-price">
+                                            <f:convertNumber currencySymbol="€" type="currency"/>
+                                        </h:outputText><br/>
+                                        <p:commandButton update="stock-tag @this" value="Zum Einkaufswagen hinzufügen" action="#{shoppingCart.addProductToCart(product)}" icon="pi pi-shopping-cart" disabled="#{product.stock == 0}"/><br/>
+                                        <div id="stock-tag-div">
+                                            <p:tag id="stock-tag" styleClass="p-mr-2" class="stock-tag" severity="success">#{product.stock}</p:tag>
+                                        </div>
+                                    </div>
+                 
+                            </div>
+                            <hr/>
+                        </div>
+
+                    </p:dataScroller>
+
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

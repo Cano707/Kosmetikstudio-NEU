@@ -29,7 +29,15 @@
             </div>
             <div id="top-right">
                 <ui:insert name="top-right">
-                    
+                    <h:form>
+                        <p:growl id="growl" life="2000"/>
+
+                        <p:commandLink id="impressum-command-link" update="growl" action="impressum" style="margin-right:20px;">
+                            <h:outputText value="Impressum" style="color: black"/>
+                        </p:commandLink>
+
+                    </h:form>
+
                 </ui:insert>
             </div>
         </div>

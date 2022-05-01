@@ -9,16 +9,110 @@
     <h:body>
          <ui:composition template="template/master.xhtml">
             <ui:define name="content">
-                <h:dataTable value="#{userManagerSQLBean.users}" var="user">
-                    <h:column>
-                        <f:facet name="header">
-                            Name
-                        </f:facet>
-                        #{user.name}
-                    </h:column>
+                <h:form id="user-mng-form">
+                    <p:growl id="msgs"/>
+                    <p:dataTable id="user-table" var="user" value="#{userManager.userList}" editable="true" style="margin-bottom:20px">
+                        <p:ajax event="rowEdit" listener="#{userManager.onUserEdit}" update=":user-mng-form:msgs"/>
+                        <p:ajax event="rowEditCancel" listener="#{userManager.onUserEditCancel}" update=":user-mng-form:msgs"/>
+                        
+                        <p:column headerText="ID">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{user.uid}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{user.uid}" id="uid-input" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Anrede">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{user.salutation}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{user.salutation}" id="salutation-input" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Name">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{user.name}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{user.name}" id="name-input" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Nachname">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{user.surname}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{user.surname}" id="surname-input" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        
+                        <p:column headerText="E-Mail">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{user.email}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{user.email}" id="email-input" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Telefon">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{user.phone}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{user.phone}" id="phone-input" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        <p:column headerText="Benutzername">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{user.username}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{user.username}" id="username-input" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                        
+                        <p:column headerText="Rolle">
+                            <p:cellEditor>
+                                <f:facet name="output">
+                                    <h:outputText value="#{user.role}"/>
+                                </f:facet>
+                                <f:facet name="input">
+                                    <p:inputText value="#{user.role}" id="role-input" style="width:100%"/>
+                                </f:facet>
+                            </p:cellEditor>
+                        </p:column>
+                        
+                         <p:column style="width:6rem">
+                            <p:rowEditor editTitle="Benutzer bearbeiten" cancelTitle="Abbrechen" saveTitle="Speichern"/>
+                        </p:column>
+                        
+                        
+                    </p:dataTable>
+                </h:form>
                 
-                </h:dataTable>
-
             </ui:define>
         </ui:composition>
     </h:body>

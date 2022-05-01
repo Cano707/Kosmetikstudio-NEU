@@ -5,6 +5,7 @@
 package com.mycompany.praktikum1_neu;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
  *
@@ -13,8 +14,28 @@ import java.io.Serializable;
 public class User implements Serializable{
     
     enum Role {
-        USER,
-        ADMIN
+        USER("User"),
+        ADMIN("Admin");
+        
+        String role;
+        
+        Role(String role) {
+            this.role = role;
+        }
+        
+    }
+    
+    private static HashMap<String, String> saltuations = new HashMap<String, String>() {{
+        put("Herr", "Herr");
+        put("Frau", "Frau");
+    }};
+
+    public static HashMap<String, String> getSaltuations() {
+        return saltuations;
+    }
+
+    public static void setSaltuations(HashMap<String, String> saltuations) {
+        User.saltuations = saltuations;
     }
     
     private int uid;
@@ -34,10 +55,12 @@ public class User implements Serializable{
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+        
     }
     
     public User(int uid, String salutation, String name, String surname, String email, String phone, String username, String password, Role role) {
         
+        this.uid = uid;
         this.salutation = salutation;
         this.name = name;
         this.surname = surname;
@@ -46,6 +69,14 @@ public class User implements Serializable{
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    public int getUid() {
+        return uid;
+    }
+
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
     public Role getRole() {

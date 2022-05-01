@@ -5,6 +5,7 @@
 package com.mycompany.praktikum1_neu;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -12,6 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 /**
  *
@@ -37,6 +39,7 @@ public class Registration implements Serializable {
     @Inject
     private Database db;
     
+    private HashMap<String, String> salutations;
     
     /**
      * Creates a new instance of Registration
@@ -51,11 +54,21 @@ public class Registration implements Serializable {
         cxt = FacesContext.getCurrentInstance();
         userList = db.getUserList();
         phc = new PasswordHashConverter();
+        salutations = User.getSaltuations();
+    }
+
+    public HashMap<String, String> getSalutations() {
+        return salutations;
+    }
+
+    public void setSalutations(HashMap<String, String> salutations) {
+        this.salutations = salutations;
     }
     
-    public void register() {
+    public String register() {
         cxt = FacesContext.getCurrentInstance();
-        User newUser = new User(Database.getId(), salutation, name, surname, email, phone, username, phc.getPwdHash(password), User.Role.USER);
+        User newUser = new User(Database.getUid(), salutation, name, surname, email, phone, username, phc.getPwdHash(password), User.Role.USER);
+        String redirect = "?faces-redirect=true";
         
         if(this.userList.isEmpty()) {
             this.userList.add(newUser);
@@ -67,7 +80,7 @@ public class Registration implements Serializable {
                     FacesMessage fm = new FacesMessage("Benutzer existiert bereits!");
                     fm.setSeverity(FacesMessage.SEVERITY_ERROR);
                     cxt.addMessage("registration-notfication-key", fm);
-                    LOGGER.info("User already exists");
+                    LOGGER.info("User already exists");redirect = "";
                 }
             }
             if(neu) {
@@ -77,8 +90,10 @@ public class Registration implements Serializable {
                 fm.setSeverity(FacesMessage.SEVERITY_INFO);
                 cxt.addMessage("registration-notfication-key", fm);
                 LOGGER.info("User signed up");
+                redirect = "signin?faces-redirect=true";
             }
         }
+        return redirect;
         
     }
 
@@ -169,9 +184,8 @@ public class Registration implements Serializable {
     public void setPhc(PasswordHashConverter phc) {
         this.phc = phc;
     }
+    
 
-
-            
     
     
     

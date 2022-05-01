@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"    
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+        <ui:composition template="template/master.xhtml">
+            <ui:define name="content">
+                <h:form id="service-form">
+                    <p:growl id="msgs"/>
+                    <p:dataScroller  value="#{serviceManager.serviceList}" var="service" chunkSize="3">
+                        <f:facet name="header">
+                            Scroll Down to Load More Services
+                        </f:facet>
+                            
+                        <div class="product">
+                            <hr/>
+                            <div class="product-list-item">
+                         
+                                    <div id="product-image">
+                                        <h:outputLabel  value="PIC"/>
+                                    </div>
+                                    <div class="product-list-detail">
+                                        <div class="product-name">#{service.name}</div>
+                                        <div class="product-description">#{service.description}</div>
+                                    </div>
+                                    
+                                    <div>
+                                        <p:selectOneMenu value="#{shoppingCart.time}">
+                                            <f:selectItems value="#{service.times}"/>
+                                        </p:selectOneMenu>
+                                    </div>
+                                
+                                    <div class="p-field p-col-12 p-md-4">
+                                        <p:outputLabel for="timeDe" value="Termin"/>
+                                        <p:datePicker  id="timeDe" value="#{shoppingCart.date}" locale="de"
+                                                      pattern="dd.MM.yyyy">
+                                            <f:ajax event="valueChange" render="service-form"/>
+                                        </p:datePicker>
+
+                                    </div>
+                                
+                                    <div class="product-action">
+                                        <h:outputText value="#{service.price}" id="price-label" styleClass="product-price">
+                                            <f:convertNumber currencySymbol="€" type="currency"/>
+                                        </h:outputText><br/>
+                                        <p:commandButton action="#{shoppingCart.addServiceToCart(service)}" value="Termin vereinbaren" icon="pi pi-shopping-cart" disabled="#{!service.available}"/><br/>
+                                        
+                                    </div>
+                                
+                              
+                 
+                            </div>
+                            <hr/>
+                        </div>
+
+                    </p:dataScroller>
+
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
