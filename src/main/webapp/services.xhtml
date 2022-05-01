@@ -13,7 +13,7 @@
                     <p:growl id="msgs"/>
                     <p:dataScroller  value="#{serviceManager.serviceList}" var="service" chunkSize="3">
                         <f:facet name="header">
-                            Scroll Down to Load More Services
+                            <p:tag style="width: 100%;"><span style="font-size: 20px; margin-top: 4px; margin-bottom: 4px;">Unsere Services</span></p:tag>
                         </f:facet>
                             
                         <div class="product">
@@ -21,32 +21,35 @@
                             <div class="product-list-item">
                          
                                     <div id="product-image">
-                                        <h:outputLabel  value="PIC"/>
+                                        <h:outputLabel style="background-color: skyblue; width: 100%;" value="BILD"/>
                                     </div>
                                     <div class="product-list-detail">
-                                        <div class="product-name">#{service.name}</div>
-                                        <div class="product-description">#{service.description}</div>
+                                        <p:tag severity="danger" style="margin-bottom: 5px;"><div class="product-name">#{service.name}</div></p:tag><br/>
+                                        <p:tag severity="warning"><div class="product-description">#{service.description}</div></p:tag>
                                     </div>
                                     
-                                    <div>
-                                        <p:selectOneMenu value="#{shoppingCart.time}">
-                                            <f:selectItems value="#{service.times}"/>
-                                        </p:selectOneMenu>
-                                    </div>
-                                
-                                    <div class="p-field p-col-12 p-md-4">
-                                        <p:outputLabel for="timeDe" value="Termin"/>
-                                        <p:datePicker  id="timeDe" value="#{shoppingCart.date}" locale="de"
-                                                      pattern="dd.MM.yyyy">
-                                            <f:ajax event="valueChange" render="service-form"/>
-                                        </p:datePicker>
+                                    
+                                    <p:outputLabel for="appointment-time-menu" value="Uhrzeit" style="margin-right: 10px;"/>
+                                    <p:selectOneMenu id="appointment-time-menu" value="#{shoppingCart.time}" style="margin-right: 10px;">
+                                        <f:selectItems value="#{service.times}"/>
+                                    </p:selectOneMenu>
 
-                                    </div>
+
+
+                                    <p:outputLabel for="date" value="Datum" style="margin-right: 10px;"/>
+                                    <p:datePicker  id="date" value="#{shoppingCart.date}" locale="de"
+                                                  pattern="dd.MM.yyyy" style="margin-right: 10px;">
+                                        <f:ajax event="valueChange" render="service-form"/>
+                                    </p:datePicker>
+
+                                    
                                 
                                     <div class="product-action">
-                                        <h:outputText value="#{service.price}" id="price-label" styleClass="product-price">
-                                            <f:convertNumber currencySymbol="€" type="currency"/>
-                                        </h:outputText><br/>
+                                        <p:tag severity="success" style="margin-bottom: 5px;">
+                                            <h:outputText value="#{service.price}" id="price-label" styleClass="product-price">
+                                                <f:convertNumber currencySymbol="€" type="currency"/>
+                                            </h:outputText>
+                                        </p:tag><br/>
                                         <p:commandButton action="#{shoppingCart.addServiceToCart(service)}" value="Termin vereinbaren" icon="pi pi-shopping-cart" disabled="#{!service.available}"/><br/>
                                         
                                     </div>

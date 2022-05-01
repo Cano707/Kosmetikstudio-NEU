@@ -13,7 +13,7 @@
                     <p:growl id="msgs"/>
                     <p:dataScroller  value="#{productManager.productList}" var="product" chunkSize="3">
                         <f:facet name="header">
-                            Unsere Produkte
+                            <p:tag style="width: 100%;"><span style="font-size: 20px; margin-top: 4px; margin-bottom: 4px;">Unsere Produkte</span></p:tag>
                         </f:facet>
                             
                         <div class="product">
@@ -21,24 +21,25 @@
                             <div class="product-list-item">
                          
                                     <div id="product-image">
-                                        <h:outputLabel  value="PIC"/>
+                                        <h:outputLabel style="background-color: skyblue; width: 100%;" value="BILD"/>
                                     </div>
+                                
                                     <div class="product-list-detail">
-                                        <div class="product-name">#{product.name}</div>
-                                        <div class="product-description">#{product.description}</div>
+                                        <p:tag severity="danger" style="margin-bottom: 5px;"><div class="product-name">#{product.name}</div></p:tag><br/>
+                                        <p:tag severity="warning"><div class="product-description">#{product.description}</div></p:tag>
                                     </div>
                                 
                                     <div id="delivery-div">
-                                        <p:outputLabel for="delivery-date" value="Lieferungsdatum"/>
-                                        <p:datePicker   id="delivery-date" value="#{shoppingCart.date}" locale="de" monthNavigator="true"
+                                        <p:outputLabel style="margin-right: 10px;" for="delivery-date" value="Lieferungsdatum"/>
+                                        <p:datePicker  inputStyle="width:100px;"  id="delivery-date" value="#{shoppingCart.date}" locale="de" monthNavigator="true"
                                                         pattern="dd.MM.yyyy">
                                             <f:ajax event="valueChange" render="@all"/>
                                         </p:datePicker>
                                     </div>
                                 
                                     <div id="amount-div">
-                                        <p:outputLabel for="@next" value="Menge"/>
-                                        <p:spinner id="amount-spinner" value="#{shoppingCart.amount}" placeholder="0"  min="0" max="#{product.stock}" stepFactor="1">
+                                        <p:outputLabel for="@next" value="Menge" style="margin-right: 10px;"/>
+                                        <p:spinner style="width:90px; margin-right: 10px;" id="amount-spinner" value="#{shoppingCart.amount}" placeholder="0"  min="0" max="#{product.stock}" stepFactor="1">
                                             <f:ajax event="valueChange" render="@all"/>
                                         </p:spinner>
                                     </div>

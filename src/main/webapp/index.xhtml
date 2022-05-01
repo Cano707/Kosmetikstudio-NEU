@@ -5,7 +5,7 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>Onurs Kosmetikstudio</title>
+        <title>Kosmetikstudio</title>
         
     </h:head>
     <h:body>   
@@ -14,6 +14,10 @@
                 <p:outputLabel rendered="#{sessionManager.loggedIn}">
                     Willkommen, #{sessionScope.name}
                 </p:outputLabel>
+                <p:outputLabel rendered="#{!sessionManager.loggedIn}">
+                    Willkommen in unserem Kosmetikstudio!<br/><br/>
+                </p:outputLabel>
+                
             </ui:define>
         </ui:composition>
     </h:body>

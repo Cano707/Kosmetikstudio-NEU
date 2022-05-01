@@ -9,15 +9,15 @@
 }
 
 #top-left {
-    flex-basis: 20%;
+    flex-basis: 12%;
 }
 
 #top-center {
-    flex-basis: 60%;
+    flex-basis: 83%;
 }
 
 #top-right {
-    flex-basis: 20%;
+    flex-basis: 5%;
 }
 
 .product {
@@ -61,12 +61,17 @@
 #j_idt20\:left-menu a {
     font-family: "Open Sans","Helvetica Neue",sans-serif;
     font-size: 12px;
+    
 }
+
+.ui-menu {
+    width: 100% !important;
+}
+
 
 #amount-div {
     margin-left: 10px;
 }
-
 
 
 #bottom {
@@ -81,13 +86,14 @@
 }
 
 #left {
-    flex: 0 0 200px;
+    flex-basis: 12%;
 }
 
 #content {
     flex: 1;
-    background-color: gray;
+    background-color: light;
     padding: 10px;
+    padding-top: 0px;
 }
 
 
