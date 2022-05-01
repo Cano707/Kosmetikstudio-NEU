@@ -30,14 +30,7 @@ public class User implements Serializable{
         put("Frau", "Frau");
     }};
 
-    public static HashMap<String, String> getSaltuations() {
-        return saltuations;
-    }
 
-    public static void setSaltuations(HashMap<String, String> saltuations) {
-        User.saltuations = saltuations;
-    }
-    
     private int uid;
     private String salutation;
     private String name;
@@ -144,7 +137,14 @@ public class User implements Serializable{
         this.password = password;
     }
 
+    public static HashMap<String, String> getSaltuations() {
+        return saltuations;
+    }
 
+    public static void setSaltuations(HashMap<String, String> saltuations) {
+        User.saltuations = saltuations;
+    }
+    
     
 
     

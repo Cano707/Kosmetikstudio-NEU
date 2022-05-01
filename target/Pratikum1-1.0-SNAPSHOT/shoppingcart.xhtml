@@ -13,76 +13,52 @@
                     <div class="card">
                         <p:tabView>
                             <p:tab title="Produkte">
-                                
-                                <p:dataTable id="product-shopping-card-table" var="productOrder" value="#{shoppingCart.productList}"  style="margin-bottom:20px">
-
+                                <p:dataTable id="product-shopping-card-table" var="productOrder" value="#{shoppingCart.productList}"  style="margin-bottom:20px" rowKey="#{productOrder.product.id}">
                                     <p:column headerText="Name">
                                         <h:outputText value="#{productOrder.product.name}"/>
                                     </p:column>
-
                                     <p:column headerText="Menge">
-                                        <p:outputLabel for="@next" value="Menge"/>
+                                        
                                         <p:spinner id="amount-spinner" value="#{productOrder.amount}"  min="0" max="#{productOrder.product.stock}" stepFactor="1">
                                             <f:ajax event="valueChange" render="@this"/>
                                         </p:spinner>
                                     </p:column>
-
                                     <p:column headerText="Lieferungsdatum">
-                                      
-                                        
                                         <p:datePicker  id="delivery-product-shopping-cart" value="#{productOrder.date}" locale="de"
                                                       pattern="dd.MM.yyyy">
                                             <f:ajax event="valueChange" render="shopping-cart"/>
                                         </p:datePicker>
                                     </p:column>
-
                                     
-                                   
-                                
                                     
                                 </p:dataTable>
-                                 <h:outputText value="Teilsumme: #{shoppingCart.priceSumProducts}"/>
+                                <h:outputText   style="margin-left: 30px; color: red; font-size: 18px;" value="Teilsumme: #{shoppingCart.priceSumProducts} €"/>
                                 
+                           
                             </p:tab>
                             <p:tab title="Services">
                                 <p:dataTable id="service-shopping-card-table" var="serviceOrder" value="#{shoppingCart.serviceList}"  style="margin-bottom:20px">
-
                                     <p:column headerText="Name">
                                         <h:outputText value="#{serviceOrder.service.name}"/>
                                     </p:column>
-
-
                                     <p:column headerText="Datum">
                                         <p:datePicker  id="apppointment-services-shopping-cart" value="#{serviceOrder.date}" locale="de"
                                                       pattern="dd.MM.yyyy">
                                             <f:ajax event="valueChange" render="shopping-cart"/>
                                         </p:datePicker>
                                     </p:column>
-
-                                  
                                     <p:column headerText="Uhrzeit">
                                         <p:selectOneMenu value="#{serviceOrder.time}">
                                             <f:selectItems value="#{serviceOrder.service.times}"/>
                                             <f:ajax event="valueChange"/>
                                         </p:selectOneMenu>
                                     </p:column>
-                                    
-                                    
                                 </p:dataTable>
-                                
-                                <h:outputText value="Teilsumme: #{shoppingCart.priceSumServices}"/>
-                                
+                                <h:outputText  style="margin-left: 30px; color: red; font-size: 18px;"  value="Teilsumme: #{shoppingCart.priceSumServices} €"/>
                             </p:tab>
-                            
-                        
                         </p:tabView>
-                      
-                        
                         <p:commandButton value="Bestellen" action="#{shoppingCart.order}" />
-                        
-                        <h:outputText value="Summe: #{shoppingCart.priceSum}"/>
-                                
-                        
+                        <h:outputText style="margin-left: 30px; color: red; font-size: 18px;" value="Summe: #{shoppingCart.priceSum} €"/>
                     </div>
                 </h:form>
             </ui:define>

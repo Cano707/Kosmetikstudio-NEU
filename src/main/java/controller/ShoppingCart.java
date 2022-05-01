@@ -32,37 +32,23 @@ public class ShoppingCart implements Serializable {
     private float priceSum;
     private float priceSumProducts;
     private float priceSumServices;
+    private ProductOrder selectedProductOrder;
 
-    public float getPriceSum() {
-        return priceSum;
+    public ProductOrder getSelectedProductOrder() {
+        return selectedProductOrder;
     }
 
-    public void setPriceSum(float priceSum) {
-        this.priceSum = priceSum;
+    public void setSelectedProductOrder(ProductOrder selectedProductOrder) {
+        this.selectedProductOrder = selectedProductOrder;
     }
-
+ 
     private int amount; 
     private Date date;
     private String time;
 
     @Inject
     SessionManager session;
-    
-    public String getTime() {
-        return time;
-    }
 
-    public void setTime(String time) {
-        this.time = time;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     /**
      * Creates a new instance of ShoppingCart
@@ -80,15 +66,16 @@ public class ShoppingCart implements Serializable {
     }
     
     public void addProductToCart(Product product) {
+        System.out.println("AMOUNT: " + amount);
         if(product.getStock() - amount >= 0) {
             product.setStock(product.getStock()-amount);
 
             ProductOrder pOrder = new ProductOrder(product, amount, date);
             productList.add(pOrder);
-            
+            priceSumProducts = priceSumProducts + product.getPrice() * amount;
+            priceSum = priceSum + product.getPrice() * amount;
         }
-        priceSumProducts = priceSumProducts + product.getPrice() * amount;
-        priceSum = priceSum + product.getPrice() * amount;
+        
     }
     
     public void addServiceToCart(Service service) {
@@ -149,4 +136,29 @@ public class ShoppingCart implements Serializable {
     public void setServiceList(List<ServiceOrder> serviceList) {
         this.serviceList = serviceList;
     }
+    public float getPriceSum() {
+        return priceSum;
+    }
+
+    public void setPriceSum(float priceSum) {
+        this.priceSum = priceSum;
+    }
+    
+        
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
 }

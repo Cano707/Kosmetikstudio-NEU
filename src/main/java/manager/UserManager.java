@@ -52,6 +52,7 @@ public class UserManager implements Serializable {
     
     public void onUserEditCancel(RowEditEvent<User> event) {
         FacesMessage fm = new FacesMessage("Änderungen verworfen");
+        fm.setSeverity(FacesMessage.SEVERITY_WARN);
         FacesContext.getCurrentInstance().addMessage(null, fm);
     }
     

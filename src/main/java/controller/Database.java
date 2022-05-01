@@ -43,8 +43,6 @@ public class Database implements Serializable {
     private static int sid = 0;
     private List<Service> serviceList;
     
-    private List<ProductOrder> productOrderList;
-    private List<ServiceOrder> serviceOrderList;
     
     private FacesContext cxt;
     private HttpSession session;
@@ -66,8 +64,6 @@ public class Database implements Serializable {
         userList = new ArrayList<>();
         productList = new ArrayList<>();
         serviceList = new ArrayList<>();
-        productOrderList = new ArrayList<>();
-        serviceOrderList = new ArrayList<>();
         phc = new PasswordHashConverter();
         fillUserList();
         fillProductList();

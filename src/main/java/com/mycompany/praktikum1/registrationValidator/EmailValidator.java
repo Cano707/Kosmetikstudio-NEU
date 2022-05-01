@@ -10,9 +10,12 @@ import javax.faces.validator.FacesValidator;
 /**
  *
  * @author cano
+ * 
+ * Dient zur Validierung von E-Mail Adressen
  */
 @FacesValidator("emailValidator")
 public class EmailValidator extends RegexValidator {
+    
 
     @Override
     protected String getValidationErrorString() {

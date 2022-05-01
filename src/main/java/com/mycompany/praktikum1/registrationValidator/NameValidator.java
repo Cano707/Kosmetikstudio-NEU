@@ -10,6 +10,8 @@ import javax.faces.validator.FacesValidator;
 /**
  *
  * @author cano
+ * 
+ * Dient zur Validierung von Namen
  */
 @FacesValidator("nameValidator")
 public class NameValidator extends RegexValidator {
