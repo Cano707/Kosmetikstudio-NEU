@@ -9,7 +9,8 @@ import javax.faces.validator.FacesValidator;
 
 /**
  *
- * @author cano
+ * @author Onur-Can Yaman
+ * @version 1.0
  * 
  * Dient zur Validierung von E-Mail Adressen
  */

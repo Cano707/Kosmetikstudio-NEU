@@ -20,7 +20,11 @@ import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 /**
  *
- * @author cano
+ * @author Onur-Can Yaman
+ * @version 1.0
+ * 
+ * Registrationsklasse, die den Nutzer - bei Eingabe korrekter Registrationsdaten
+ * ins Usersystem einträgt.
  */
 @Named(value = "registration")
 @RequestScoped
@@ -68,6 +72,12 @@ public class Registration implements Serializable {
         this.salutations = salutations;
     }
     
+    /**
+     * Prüft, ob die eingegebene Nutzerdaten (Username und E-Mail) schon im System
+     * eingetragen sind. Falls ja, dann soll eine entsprechende Nachricht ans
+     * Front-End geschickt werden. 
+     * @return Nächste Seite an die weitergeleitet werden soll.
+     */
     public String register() {
         cxt = FacesContext.getCurrentInstance();
         User newUser = new User(Database.getUid(), salutation, name, surname, email, phone, username, phc.getPwdHash(password), User.Role.USER);

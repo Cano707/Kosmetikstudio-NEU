@@ -12,7 +12,7 @@ import javax.faces.validator.FacesValidator;
  * @author Onur-Can Yaman
  * @version 1.0
  * 
- * 
+ * Dient zur Validierung des Passworts
  */
 @FacesValidator("passwordValidator")
 public class PasswordValidator extends RegexValidator{

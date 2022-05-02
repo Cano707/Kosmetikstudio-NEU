@@ -22,7 +22,11 @@ import javax.inject.Inject;
 
 /**
  *
- * @author cano
+ * @author Onur-Can Yaman
+ * @version 1.0
+ * 
+ * Einkaufswagen, der die von den Nutzer ausgewählten Produkte über die Session 
+ * hinweg speichert und die Bestellung in Auftrag gibt.
  */
 @Named(value = "shoppingCart")
 @SessionScoped
@@ -34,14 +38,6 @@ public class ShoppingCart implements Serializable {
     private float priceSumServices;
     private ProductOrder selectedProductOrder;
 
-    public ProductOrder getSelectedProductOrder() {
-        return selectedProductOrder;
-    }
-
-    public void setSelectedProductOrder(ProductOrder selectedProductOrder) {
-        this.selectedProductOrder = selectedProductOrder;
-    }
- 
     private int amount; 
     private Date date;
     private String time;
@@ -65,6 +61,22 @@ public class ShoppingCart implements Serializable {
         priceSumServices = 0f;
     }
     
+    /**
+     * Gibt die Bestellung im Auftrag, falls der Nutzer eingeloggt i
+     * @return 
+     */
+    public String order() {
+        if(session.isLoggedIn()) {
+            return "index";
+        }
+        return "signin";
+    }
+    
+    
+    /**
+     * Fügt ein Produkt zum Einkaufswagen hinzu
+     * @param product: Das ausgewählte Produkt
+     */
     public void addProductToCart(Product product) {
         System.out.println("AMOUNT: " + amount);
         if(product.getStock() - amount >= 0) {
@@ -78,6 +90,10 @@ public class ShoppingCart implements Serializable {
         
     }
     
+    /**
+     * Fügt einene Service zum Einkaufswagen hinzu
+     * @param service: Der ausgewählte Seite 
+     */
     public void addServiceToCart(Service service) {
         ServiceOrder sOrder = new ServiceOrder(service, date, time);
         serviceList.add(sOrder);
@@ -101,12 +117,6 @@ public class ShoppingCart implements Serializable {
         this.priceSumServices = priceSumServices;
     }
     
-    public String order() {
-        if(session.isLoggedIn()) {
-            return "index";
-        }
-        return "signin";
-    }
     
     public int getAmount() {
         return amount;
@@ -117,7 +127,6 @@ public class ShoppingCart implements Serializable {
     }
 
     public List<ProductOrder> getProductList() {
-        System.out.println("getting product list");
         for(ProductOrder pOrder : productList) {
             System.out.println(pOrder.getProduct().getName());
         }
@@ -129,7 +138,6 @@ public class ShoppingCart implements Serializable {
     }
 
     public List<ServiceOrder> getServiceList() {
-        System.out.println("getting shopping list");
         return serviceList;
     }
 
@@ -161,4 +169,12 @@ public class ShoppingCart implements Serializable {
         this.date = date;
     }
 
+    public ProductOrder getSelectedProductOrder() {
+        return selectedProductOrder;
+    }
+
+    public void setSelectedProductOrder(ProductOrder selectedProductOrder) {
+        this.selectedProductOrder = selectedProductOrder;
+    }
+ 
 }

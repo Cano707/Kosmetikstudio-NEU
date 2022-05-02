@@ -45,6 +45,11 @@ public class UserManager implements Serializable {
         
     }
     
+    
+    /**
+     * Wenn die Änderung gespeichert wird, wird 
+     * @param event 
+     */
     public void onUserEdit(RowEditEvent<User> event) {
         FacesMessage fm = new FacesMessage("Änderungen übernommen");
         FacesContext.getCurrentInstance().addMessage(null, fm);

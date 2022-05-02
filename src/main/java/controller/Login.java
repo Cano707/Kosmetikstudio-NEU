@@ -19,7 +19,12 @@ import javax.inject.Inject;
 
 /**
  *
- * @author cano
+ * @author Onur-Can Yaman
+ * @version 1.0
+ * 
+ * Login Klasse, die dafür zuständig ist, die Logindaten zu validieren und 
+ * den Nutzer bei korrekter Eingabe einzuloggen bzw. bei fehlerhaften Eingaben
+ * darüber zu informieren.
  */
 @Named(value = "login")
 @RequestScoped
@@ -47,6 +52,12 @@ public class Login implements Serializable{
         phc = new PasswordHashConverter();
     }
     
+    /**
+     * Gleicht die Logindaten mit den Userdaten in der Datenbank ab und
+     * gibt eine entsprechende Rückmeldung bei korrekter bzw. inkorrekter 
+     * Eingabe zurück.
+     * @return Nächste Seite auf die weitergeleitet werden soll.
+     */
     public String login() {
         FacesMessage fm;
         FacesContext cxt = FacesContext.getCurrentInstance();
@@ -70,6 +81,11 @@ public class Login implements Serializable{
         return "signin";
     }
     
+    /**
+     * Invalidiert die Session und meldet den Benuter entsprechend ab.
+     * 
+     * @return Startseite auf die weitergeleitet werden soll.
+     */
     public String logout() {
         FacesContext cxt = FacesContext.getCurrentInstance();
         cxt.getExternalContext().invalidateSession();

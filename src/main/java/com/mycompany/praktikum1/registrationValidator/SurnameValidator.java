@@ -10,7 +10,10 @@ import javax.faces.validator.FacesValidator;
 
 /**
  *
- * @author cano
+ * @author Onur-Can Yaman
+ * @version 1.0
+ * 
+ * Dient zur Validierung des Nachnamens
  */
 @FacesValidator("surnameValidator")
 public class SurnameValidator extends RegexValidator {
